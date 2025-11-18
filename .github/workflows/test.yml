@@ -1,0 +1,19 @@
+name: Run Dashboard Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Conda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: cs3030
+          python-version: 3.11
+      - name: Install Dependencies
+        run: |
+          conda install pytest -y
+      - name: Run Tests
+        run: pytest -v
