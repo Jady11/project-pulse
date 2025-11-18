@@ -7,13 +7,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Conda
         uses: conda-incubator/setup-miniconda@v3
         with:
           activate-environment: cs3030
           python-version: 3.11
+          auto-activate-base: false
+
       - name: Install Dependencies
-        run: |
-          conda install pytest -y
+        shell: bash -l {0}
+        run: conda install pytest -y
+
       - name: Run Tests
+        shell: bash -l {0}
         run: pytest -v
